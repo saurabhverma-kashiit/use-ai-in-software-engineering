@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise AI-SDLC Guide</title>
+    <style>
+        :root {
+            /* Enterprise Color Palette */
+            --primary: #0f172a;      /* Slate 900 */
+            --secondary: #334155;    /* Slate 700 */
+            --accent: #2563eb;       /* Royal Blue */
+            --bg: #f8fafc;           /* Slate 50 */
+            --card-bg: #ffffff;
+            --text: #334155;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --success-bg: #ecfdf5;
+            --success-text: #065f46;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Phase Card Styling */
+        .phase-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .phase-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .phase-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* Tool Badges */
+        .tools-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: monospace;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .phase-content {
+            padding: 2rem;
+        }
+
+        /* Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        h3 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-top: 0;
+            border-bottom: 2px solid var(--code-bg);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        ul { margin: 0; padding-left: 1.2rem; }
+        li { margin-bottom: 0.75rem; font-size: 0.95rem; }
+
+        /* Code & Prompts */
+        .snippet {
+            background: var(--code-bg);
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            font-family: "Courier New", monospace;
+            font-size: 0.85rem;
+            color: #1e293b;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Pro Tip Box */
+        .pro-tip {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: var(--success-bg);
+            border: 1px solid #a7f3d0;
+            border-radius: 6px;
+            color: var(--success-text);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .pro-tip strong {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>AI-Augmented SDLC Framework</h1>
+        <p class="subtitle">Operational guide for Architecture, Agile, DevOps, and Maintenance workflows using GitHub Copilot, Gemini, and Cursor.</p>
+    </header>
+
+    <div class="phase-card">
+        <div class="phase-header">
+            <h2>1. Planning & Requirements</h2>
+            <span class="tools-badge">Gemini • Jira Plugins</span>
+        </div>
+        <div class="phase-content">
+            <div class="content-grid">
+                <div>
+                    <h3>Idea to Epic</h3>
+                    <ul>
+                        <li><strong>Brainstorming:</strong> Use AI to structure raw ideas into Epics > Features > Stories hierarchy.</li>
+                        <li><strong>Acceptance Criteria (AC):</strong> Generate exhaustive ACs, including edge cases and negative scenarios.</li>
+                        <li><strong>Dependency Mapping:</strong> Ask AI to analyze a list of stories and identify logical blockers/sequences.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Analysis (SRS & Agile)</h3>
+                    <ul>
+                        <li><strong>"Just-in-Time" Requirements:</strong> In Agile, generate detailed specs only for the upcoming sprint to reduce waste.</li>
+                        <li><strong>Gap Analysis:</strong> Feed AI the SRS and ask: "What assumes a happy path? Where will this break?"</li>
+                        <li><strong>Compliance Check:</strong> "Review these requirements for GDPR and PCI-DSS compliance risks."</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-header">
+            <h2>2. Architecture & Design</h2>
+            <span class="tools-badge">Mermaid.js • TOGAF • STRIDE</span>
+        </div>
+        <div class="phase-content">
+            <div class="content-grid">
+                <div>
+                    <h3>Modeling (C4 & BDAT)</h3>
+                    <ul>
+                        <li><strong>Visuals as Code:</strong> Generate Mermaid.js or PlantUML code for C4 Container diagrams.</li>
+                        <li><strong>TOGAF Alignment:</strong> Validate design decisions against enterprise modularity principles.</li>
+                        <li><strong>Integration Strategy:</strong> "Compare Webhooks vs Polling for this specific data flow."</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Risk & Security</h3>
+                    <ul>
+                        <li><strong>AI Threat Modeling:</strong> Paste the architecture and prompt: 
+                            <div class="snippet">"Analyze this design using the STRIDE methodology. Identify potential spoofing or elevation of privilege risks."</div>
+                        </li>
+                        <li><strong>Single Point of Failure:</strong> Ask AI to stress-test the design for bottlenecks.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-header">
+            <h2>3. Implementation (The "Shift Left")</h2>
+            <span class="tools-badge">Cursor • Copilot • GitHub Actions</span>
+        </div>
+        <div class="phase-content">
+            <div class="content-grid">
+                <div>
+                    <h3>Context Engineering</h3>
+                    <ul>
+                        <li><strong>.cursorrules / Agent.md:</strong> 
+                            <div class="pro-tip">
+                                <strong>💡 Pro Tip:</strong> Create a <code>.cursorrules</code> file in your root. Define your Tech Stack, Folder Structure, and Patterns (e.g., "Always use Repository Pattern"). AI tools read this first!
+                            </div>
+                        </li>
+                        <li><strong>Prototype/MVP:</strong> Generate full microservice skeletons to "Fail Fast" and validate concepts.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Code Quality</h3>
+                    <ul>
+                        <li><strong>Pre-PR Review:</strong> "Review my changes for Clean Architecture violations and potential memory leaks before I commit."</li>
+                        <li><strong>Documentation:</strong> Auto-generate <strong>Architecture Decision Records (ADRs)</strong> from conversation transcripts.</li>
+                        <li><strong>Refactoring:</strong> Use Cursor (Cmd+K) to extract complex logic into reusable services.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-header">
+            <h2>4. Testing & Integration</h2>
+            <span class="tools-badge">Playwright • NUnit • Postman</span>
+        </div>
+        <div class="phase-content">
+            <div class="content-grid">
+                <div>
+                    <h3>Test Generation</h3>
+                    <ul>
+                        <li><strong>AC to Test Cases:</strong> Convert User Stories directly into Gherkin (Cucumber) syntax or NUnit test classes.</li>
+                        <li><strong>Smart Stubs:</strong> "Create a mock Payment Gateway that randomly simulates timeouts to test our retry logic."</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Coverage & Automation</h3>
+                    <ul>
+                        <li><strong>Property-Based Testing:</strong> Ask AI to generate random inputs (Fuzz Testing) to break your validation logic.</li>
+                        <li><strong>Integration Scripts:</strong> Generate Playwright/Selenium automation scripts directly from the UI design mockups.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-header">
+            <h2>5. Operations & Maintenance</h2>
+            <span class="tools-badge">Gemini • Datadog AI • SQL</span>
+        </div>
+        <div class="phase-content">
+            <div class="content-grid">
+                <div>
+                    <h3>Observability & RCA</h3>
+                    <ul>
+                        <li><strong>Log Analysis:</strong> Paste obscure error logs or stack traces into Gemini: 
+                            <div class="snippet">"Explain this Java stack trace in plain English and point to the likely root cause."</div>
+                        </li>
+                        <li><strong>Incident Summaries:</strong> Feed the incident chat history (Slack/Teams) to AI to auto-generate the <strong>Post-Mortem / RCA Report</strong>.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Legacy Modernization</h3>
+                    <ul>
+                        <li><strong>Code Archaeology:</strong> Highlight undocumented legacy functions and ask: "Explain the business logic of this function step-by-step."</li>
+                        <li><strong>Performance Tuning:</strong> "Analyze this SQL query. Suggest indexes or rewriting strategies to optimize execution time."</li>
+                        <li><strong>Dependency Upgrades:</strong> "List the breaking changes I need to handle when migrating from Angular 14 to 17."</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 2rem;">
+        Generated for Internal Engineering Teams | <a href="#" style="color: var(--accent); text-decoration: none;">View Guidelines</a>
+    </footer>
+</div>
+
+</body>
+</html>
