@@ -1,315 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise AI-SDLC Guide</title>
-    <style>
-        :root {
-            /* Enterprise Color Palette */
-            --primary: #0f172a;      /* Slate 900 */
-            --secondary: #334155;    /* Slate 700 */
-            --accent: #2563eb;       /* Royal Blue */
-            --bg: #f8fafc;           /* Slate 50 */
-            --card-bg: #ffffff;
-            --text: #334155;
-            --border: #e2e8f0;
-            --code-bg: #f1f5f9;
-            --success-bg: #ecfdf5;
-            --success-text: #065f46;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Using AI in Software Development Life Cycle (SDLC)</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
-            margin: 0;
-            padding: 2rem 1rem;
-        }
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      line-height: 1.7;
+      max-width: 980px;
+      margin: auto;
+      padding: 24px;
+      background-color: #ffffff;
+      color: #222;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    h1, h2, h3 {
+      color: #0f172a;
+    }
 
-        /* Header */
-        header {
-            text-align: center;
-            margin-bottom: 3.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 2rem;
-        }
+    h1 {
+      border-bottom: 3px solid #e5e7eb;
+      padding-bottom: 10px;
+    }
 
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-            letter-spacing: -0.025em;
-        }
+    h2 {
+      margin-top: 40px;
+      border-left: 6px solid #2563eb;
+      padding-left: 10px;
+    }
 
-        .subtitle {
-            color: #64748b;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+    h3 {
+      margin-top: 24px;
+    }
 
-        /* Phase Card Styling */
-        .phase-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 2.5rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+    ul {
+      margin-left: 20px;
+    }
 
-        .phase-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
+    li {
+      margin-bottom: 8px;
+    }
 
-        .phase-header {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    code {
+      background: #f1f5f9;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
 
-        .phase-header h2 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
+    .toc {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
 
-        /* Tool Badges */
-        .tools-badge {
-            background: rgba(255,255,255,0.15);
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: monospace;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
+    .prompt {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 14px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 0.95em;
+    }
 
-        .phase-content {
-            padding: 2rem;
-        }
+    .note {
+      background: #eff6ff;
+      border-left: 5px solid #3b82f6;
+      padding: 12px;
+      margin: 20px 0;
+    }
 
-        /* Grid Layout */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-        }
-
-        h3 {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent);
-            margin-top: 0;
-            border-bottom: 2px solid var(--code-bg);
-            padding-bottom: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        ul { margin: 0; padding-left: 1.2rem; }
-        li { margin-bottom: 0.75rem; font-size: 0.95rem; }
-
-        /* Code & Prompts */
-        .snippet {
-            background: var(--code-bg);
-            border-left: 3px solid var(--accent);
-            padding: 0.75rem;
-            margin-top: 0.5rem;
-            font-family: "Courier New", monospace;
-            font-size: 0.85rem;
-            color: #1e293b;
-            border-radius: 0 4px 4px 0;
-        }
-
-        /* Pro Tip Box */
-        .pro-tip {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background-color: var(--success-bg);
-            border: 1px solid #a7f3d0;
-            border-radius: 6px;
-            color: var(--success-text);
-            font-size: 0.9rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .pro-tip strong {
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .content-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            h1 { font-size: 1.8rem; }
-        }
-    </style>
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
-    <header>
-        <h1>AI-Augmented SDLC Framework</h1>
-        <p class="subtitle">Operational guide for Architecture, Agile, DevOps, and Maintenance workflows using GitHub Copilot, Gemini, and Cursor.</p>
-    </header>
+<h1>Using AI in the Software Development Life Cycle (SDLC)</h1>
 
-    <div class="phase-card">
-        <div class="phase-header">
-            <h2>1. Planning & Requirements</h2>
-            <span class="tools-badge">Gemini • Jira Plugins</span>
-        </div>
-        <div class="phase-content">
-            <div class="content-grid">
-                <div>
-                    <h3>Idea to Epic</h3>
-                    <ul>
-                        <li><strong>Brainstorming:</strong> Use AI to structure raw ideas into Epics > Features > Stories hierarchy.</li>
-                        <li><strong>Acceptance Criteria (AC):</strong> Generate exhaustive ACs, including edge cases and negative scenarios.</li>
-                        <li><strong>Dependency Mapping:</strong> Ask AI to analyze a list of stories and identify logical blockers/sequences.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Analysis (SRS & Agile)</h3>
-                    <ul>
-                        <li><strong>"Just-in-Time" Requirements:</strong> In Agile, generate detailed specs only for the upcoming sprint to reduce waste.</li>
-                        <li><strong>Gap Analysis:</strong> Feed AI the SRS and ask: "What assumes a happy path? Where will this break?"</li>
-                        <li><strong>Compliance Check:</strong> "Review these requirements for GDPR and PCI-DSS compliance risks."</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+<p>
+This page captures my practical learnings on how <strong>AI can be applied across the Software Development Life Cycle (SDLC)</strong>.
+Rather than replacing engineers, AI acts as a <strong>force multiplier</strong>—helping us plan better, code faster, test smarter,
+and operate systems more efficiently.
+</p>
 
-    <div class="phase-card">
-        <div class="phase-header">
-            <h2>2. Architecture & Design</h2>
-            <span class="tools-badge">Mermaid.js • TOGAF • STRIDE</span>
-        </div>
-        <div class="phase-content">
-            <div class="content-grid">
-                <div>
-                    <h3>Modeling (C4 & BDAT)</h3>
-                    <ul>
-                        <li><strong>Visuals as Code:</strong> Generate Mermaid.js or PlantUML code for C4 Container diagrams.</li>
-                        <li><strong>TOGAF Alignment:</strong> Validate design decisions against enterprise modularity principles.</li>
-                        <li><strong>Integration Strategy:</strong> "Compare Webhooks vs Polling for this specific data flow."</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Risk & Security</h3>
-                    <ul>
-                        <li><strong>AI Threat Modeling:</strong> Paste the architecture and prompt: 
-                            <div class="snippet">"Analyze this design using the STRIDE methodology. Identify potential spoofing or elevation of privilege risks."</div>
-                        </li>
-                        <li><strong>Single Point of Failure:</strong> Ask AI to stress-test the design for bottlenecks.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+<p>
+The goal here is to document <em>how an experienced engineer can realistically use AI tools</em> in day-to-day work, based on hands-on exploration.
+</p>
 
-    <div class="phase-card">
-        <div class="phase-header">
-            <h2>3. Implementation (The "Shift Left")</h2>
-            <span class="tools-badge">Cursor • Copilot • GitHub Actions</span>
-        </div>
-        <div class="phase-content">
-            <div class="content-grid">
-                <div>
-                    <h3>Context Engineering</h3>
-                    <ul>
-                        <li><strong>.cursorrules / Agent.md:</strong> 
-                            <div class="pro-tip">
-                                <strong>💡 Pro Tip:</strong> Create a <code>.cursorrules</code> file in your root. Define your Tech Stack, Folder Structure, and Patterns (e.g., "Always use Repository Pattern"). AI tools read this first!
-                            </div>
-                        </li>
-                        <li><strong>Prototype/MVP:</strong> Generate full microservice skeletons to "Fail Fast" and validate concepts.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Code Quality</h3>
-                    <ul>
-                        <li><strong>Pre-PR Review:</strong> "Review my changes for Clean Architecture violations and potential memory leaks before I commit."</li>
-                        <li><strong>Documentation:</strong> Auto-generate <strong>Architecture Decision Records (ADRs)</strong> from conversation transcripts.</li>
-                        <li><strong>Refactoring:</strong> Use Cursor (Cmd+K) to extract complex logic into reusable services.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="phase-card">
-        <div class="phase-header">
-            <h2>4. Testing & Integration</h2>
-            <span class="tools-badge">Playwright • NUnit • Postman</span>
-        </div>
-        <div class="phase-content">
-            <div class="content-grid">
-                <div>
-                    <h3>Test Generation</h3>
-                    <ul>
-                        <li><strong>AC to Test Cases:</strong> Convert User Stories directly into Gherkin (Cucumber) syntax or NUnit test classes.</li>
-                        <li><strong>Smart Stubs:</strong> "Create a mock Payment Gateway that randomly simulates timeouts to test our retry logic."</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Coverage & Automation</h3>
-                    <ul>
-                        <li><strong>Property-Based Testing:</strong> Ask AI to generate random inputs (Fuzz Testing) to break your validation logic.</li>
-                        <li><strong>Integration Scripts:</strong> Generate Playwright/Selenium automation scripts directly from the UI design mockups.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="phase-card">
-        <div class="phase-header">
-            <h2>5. Operations & Maintenance</h2>
-            <span class="tools-badge">Gemini • Datadog AI • SQL</span>
-        </div>
-        <div class="phase-content">
-            <div class="content-grid">
-                <div>
-                    <h3>Observability & RCA</h3>
-                    <ul>
-                        <li><strong>Log Analysis:</strong> Paste obscure error logs or stack traces into Gemini: 
-                            <div class="snippet">"Explain this Java stack trace in plain English and point to the likely root cause."</div>
-                        </li>
-                        <li><strong>Incident Summaries:</strong> Feed the incident chat history (Slack/Teams) to AI to auto-generate the <strong>Post-Mortem / RCA Report</strong>.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Legacy Modernization</h3>
-                    <ul>
-                        <li><strong>Code Archaeology:</strong> Highlight undocumented legacy functions and ask: "Explain the business logic of this function step-by-step."</li>
-                        <li><strong>Performance Tuning:</strong> "Analyze this SQL query. Suggest indexes or rewriting strategies to optimize execution time."</li>
-                        <li><strong>Dependency Upgrades:</strong> "List the breaking changes I need to handle when migrating from Angular 14 to 17."</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer style="text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 2rem;">
-        Generated for Internal Engineering Teams | <a href="#" style="color: var(--accent); text-decoration: none;">View Guidelines</a>
-    </footer>
+<div class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#planning">1. Planning & Requirements</a></li>
+    <li><a href="#design">2. Architecture & Design</a></li>
+    <li><a href="#implementation">3. Implementation (Shift-Left)</a></li>
+    <li><a href="#testing">4. Testing & Integration</a></li>
+    <li><a href="#operations">5. Operations & Maintenance</a></li>
+    <li><a href="#summary">Summary & Key Takeaways</a></li>
+  </ul>
 </div>
+
+<hr/>
+
+<h2 id="planning">1. Planning & Requirements</h2>
+
+<p>
+Planning is often ambiguous and time-consuming. AI can help convert <strong>raw ideas into structured artefacts</strong>
+quickly, reducing back-and-forth and missed requirements.
+</p>
+
+<h3>What AI Helps With</h3>
+<ul>
+  <li>Converting ideas into <strong>Epics → Features → User Stories</strong></li>
+  <li>Generating acceptance criteria</li>
+  <li>Identifying missing scenarios and edge cases</li>
+</ul>
+
+<h3>Example Prompt</h3>
+<div class="prompt">
+Act as a product owner. Convert the following idea into epics, features, user stories,
+and acceptance criteria: &lt;describe idea&gt;
+</div>
+
+<div class="note">
+<strong>Why it matters:</strong> Faster clarity, better alignment, and fewer requirement gaps early in the SDLC.
+</div>
+
+<hr/>
+
+<h2 id="design">2. Architecture & Design</h2>
+
+<p>
+Architecture decisions benefit greatly from AI-assisted brainstorming, especially when evaluating trade-offs.
+</p>
+
+<h3>What AI Helps With</h3>
+<ul>
+  <li>High-level system design suggestions</li>
+  <li>Generating architecture diagrams (C4, flow diagrams)</li>
+  <li>Identifying risks, bottlenecks, and scalability concerns</li>
+</ul>
+
+<h3>Example Prompt</h3>
+<div class="prompt">
+Design a scalable architecture for a system with the following constraints.
+Explain trade-offs and potential risks.
+</div>
+
+<div class="note">
+<strong>Tip:</strong> Always validate AI-generated designs with real constraints, load expectations, and security requirements.
+</div>
+
+<hr/>
+
+<h2 id="implementation">3. Implementation (The Shift-Left)</h2>
+
+<p>
+During coding, AI acts like a <strong>pair programmer</strong>—not perfect, but incredibly useful when guided correctly.
+</p>
+
+<h3>What AI Helps With</h3>
+<ul>
+  <li>Code scaffolding and boilerplate generation</li>
+  <li>Refactoring suggestions</li>
+  <li>Explaining unfamiliar codebases</li>
+  <li>Generating documentation and comments</li>
+</ul>
+
+<h3>Example Prompt</h3>
+<div class="prompt">
+Refactor this code to follow SOLID principles and improve readability.
+Explain the changes.
+</div>
+
+<div class="note">
+<strong>Rule of thumb:</strong> Use AI to accelerate thinking—not to skip understanding.
+</div>
+
+<hr/>
+
+<h2 id="testing">4. Testing & Integration</h2>
+
+<p>
+Testing is one of the most impactful areas where AI saves time while improving quality.
+</p>
+
+<h3>What AI Helps With</h3>
+<ul>
+  <li>Unit and integration test generation</li>
+  <li>Edge-case discovery</li>
+  <li>Test data generation</li>
+  <li>Playwright / API test scaffolding</li>
+</ul>
+
+<h3>Example Prompt</h3>
+<div class="prompt">
+Generate unit and integration test cases for this service, including edge cases.
+</div>
+
+<div class="note">
+<strong>Impact:</strong> Better test coverage with less manual effort.
+</div>
+
+<hr/>
+
+<h2 id="operations">5. Operations & Maintenance</h2>
+
+<p>
+AI continues to add value even after deployment by improving observability and incident response.
+</p>
+
+<h3>What AI Helps With</h3>
+<ul>
+  <li>Log analysis and error summarization</li>
+  <li>Root cause analysis</li>
+  <li>Runbook generation</li>
+  <li>Performance tuning suggestions</li>
+</ul>
+
+<h3>Example Prompt</h3>
+<div class="prompt">
+Analyze these logs and summarize the issue, possible root causes, and mitigation steps.
+</div>
+
+<hr/>
+
+<h2 id="summary">Summary & Key Takeaways</h2>
+
+<ul>
+  <li>AI enhances <strong>every phase of SDLC</strong>, not just coding</li>
+  <li>The biggest value comes from <strong>experienced engineers guiding AI</strong></li>
+  <li>AI reduces friction, not responsibility</li>
+  <li>Critical thinking and validation remain essential</li>
+</ul>
+
+<div class="note">
+This page reflects my current understanding and practical exploration.
+I will continue refining it as I learn more.
+</div>
+
+<footer>
+  <p>
+    Written as part of my <strong>Learning in Public</strong> journey.<br/>
+    Shared to help fellow engineers adapt, experiment, and grow with AI.
+  </p>
+</footer>
 
 </body>
 </html>
