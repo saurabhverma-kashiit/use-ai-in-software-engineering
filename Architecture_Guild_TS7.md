@@ -404,6 +404,8 @@ That is why it remains relevant for architects, even as the technology landscape
 - TypeScript official website: https://www.typescriptlang.org/
 - TypeScript handbook: https://www.typescriptlang.org/docs/handbook/intro.html
 - TypeScript GitHub repository: https://github.com/microsoft/TypeScript
+- TypeScript Update page: https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/
+- TypeScript 7 YouTube link: https://youtu.be/OytpXXeNmTQ?list=PLCvDAfZDr5ZAZba9bzlNntj8tk5uFJEfG
 
 ---
 
